@@ -1,96 +1,113 @@
 #!/usr/bin/env python3
+"""Generate brew-nix-compatible metadata from the cask registry."""
 
+from __future__ import annotations
+
+import argparse
 import json
-import re
 import urllib.request
+from collections.abc import Callable, Iterable, Mapping
 from pathlib import Path
 from urllib.parse import urlparse
 
-CASK_URL = (
-    "https://raw.githubusercontent.com/"
-    "AnInsomniacy/homebrew-motrix-next/main/Casks/motrix-next.rb"
-)
+from .adapters import ADAPTERS
+
 ROOT = Path(__file__).resolve().parent.parent
+REGISTRY = ROOT / "registry"
 OUTPUT = ROOT / "cask.json"
-INTEL_VARIATIONS = (
-    "golden_gate",
-    "tahoe",
-    "sequoia",
-    "sonoma",
-    "ventura",
-    "monterey",
-    "big_sur",
-    "catalina",
-)
+USER_AGENT = "futuping/brew-api-extra"
 
 
-def match(pattern: str, source: str, label: str) -> str:
-    result = re.search(pattern, source, re.MULTILINE)
-    if result is None:
-        raise RuntimeError(f"unable to parse {label} from upstream cask")
-    return result.group(1)
+def load_registry(directory: Path = REGISTRY) -> list[dict[str, object]]:
+    specs: list[dict[str, object]] = []
+    tokens: set[str] = set()
+
+    for path in sorted(directory.glob("*.json")):
+        spec = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(spec, dict):
+            raise RuntimeError(f"{path}: registry entry must be a JSON object")
+
+        token = spec.get("token")
+        adapter = spec.get("adapter")
+        source = spec.get("source")
+        if not isinstance(token, str) or not token:
+            raise RuntimeError(f"{path}: token must be a non-empty string")
+        if path.stem != token:
+            raise RuntimeError(f"{path}: filename must match token {token!r}")
+        if token in tokens:
+            raise RuntimeError(f"duplicate cask token: {token}")
+        if adapter not in ADAPTERS:
+            raise RuntimeError(f"{path}: unsupported adapter {adapter!r}")
+        if not isinstance(source, str) or not source:
+            raise RuntimeError(f"{path}: source must be a non-empty string")
+        parsed = urlparse(source)
+        if parsed.scheme != "https":
+            raise RuntimeError(f"{path}: source must use HTTPS")
+
+        tokens.add(token)
+        specs.append(spec)
+
+    if not specs:
+        raise RuntimeError(f"no registry entries found in {directory}")
+    return specs
 
 
-request = urllib.request.Request(
-    CASK_URL,
-    headers={"User-Agent": "futuping/brew-api-extra"},
-)
-with urllib.request.urlopen(request, timeout=30) as response:
-    cask = response.read().decode("utf-8")
-
-version = match(r'^\s*version\s+"([^"]+)"', cask, "version")
-arm_sha256 = match(r'^\s*sha256\s+arm:\s+"([0-9a-f]{64})"', cask, "ARM SHA-256")
-intel_sha256 = match(
-    r'^\s*intel:\s+"([0-9a-f]{64})"',
-    cask,
-    "Intel SHA-256",
-)
-url_template = match(r'^\s*url\s+"([^"]+)"', cask, "URL")
-name = match(r'^\s*name\s+"([^"]+)"', cask, "name")
-description = match(r'^\s*desc\s+"([^"]+)"', cask, "description")
-homepage = match(r'^\s*homepage\s+"([^"]+)"', cask, "homepage")
-application = match(r'^\s*app\s+"([^"]+\.app)"', cask, "application")
-
-if "#{version}" not in url_template or "#{arch}" not in url_template:
-    raise RuntimeError("upstream URL no longer uses the expected version/arch template")
-
-
-def release_url(architecture: str) -> str:
-    url = url_template.replace("#{version}", version).replace(
-        "#{arch}",
-        architecture,
+def fetch_source(url: str) -> str:
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": USER_AGENT},
     )
-    parsed = urlparse(url)
-    if parsed.scheme != "https" or parsed.netloc != "github.com":
-        raise RuntimeError(f"unexpected release URL: {url}")
-    return url
+    with urllib.request.urlopen(request, timeout=30) as response:
+        return response.read().decode("utf-8")
 
 
-intel = {
-    "url": release_url("x64"),
-    "sha256": intel_sha256,
-}
-metadata = [
-    {
-        "token": "motrix-next",
-        "full_token": "motrix-next",
-        "name": [name],
-        "desc": description,
-        "homepage": homepage,
-        "url": release_url("aarch64"),
-        "version": version,
-        "sha256": arm_sha256,
-        "artifacts": [{"app": [application]}],
-        "auto_updates": True,
-        "variations": {
-            variation: intel.copy() for variation in INTEL_VARIATIONS
-        },
-    }
-]
+def build_catalog(
+    specs: Iterable[Mapping[str, object]],
+    fetch: Callable[[str], str] = fetch_source,
+) -> list[dict[str, object]]:
+    catalog: list[dict[str, object]] = []
+    for spec in specs:
+        token = str(spec["token"])
+        adapter_name = str(spec["adapter"])
+        source = fetch(str(spec["source"]))
+        metadata = ADAPTERS[adapter_name](source, spec)
+        if metadata.get("token") != token:
+            raise RuntimeError(f"adapter changed cask token {token!r}")
+        catalog.append(metadata)
+    return sorted(catalog, key=lambda item: str(item["token"]))
 
-rendered = json.dumps(metadata, indent=2, ensure_ascii=False) + "\n"
-if OUTPUT.exists() and OUTPUT.read_text(encoding="utf-8") == rendered:
-    print(f"{OUTPUT.name} is already current ({version})")
-else:
+
+def render_catalog(catalog: list[dict[str, object]]) -> str:
+    return json.dumps(catalog, indent=2, ensure_ascii=False) + "\n"
+
+
+def update(check: bool = False) -> bool:
+    catalog = build_catalog(load_registry())
+    rendered = render_catalog(catalog)
+    current = OUTPUT.read_text(encoding="utf-8") if OUTPUT.exists() else None
+    if current == rendered:
+        versions = ", ".join(
+            f"{item['token']} {item['version']}" for item in catalog
+        )
+        print(f"{OUTPUT.name} is already current ({versions})")
+        return False
+    if check:
+        raise RuntimeError(f"{OUTPUT.name} is not current")
     OUTPUT.write_text(rendered, encoding="utf-8")
-    print(f"updated {OUTPUT.name} to {version}")
+    print(f"updated {OUTPUT.name} ({len(catalog)} cask(s))")
+    return True
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--check",
+        action="store_true",
+        help="fail instead of writing when cask.json is stale",
+    )
+    arguments = parser.parse_args()
+    update(check=arguments.check)
+
+
+if __name__ == "__main__":
+    main()

@@ -4,7 +4,9 @@ on:
   push:
     paths:
       - .github/workflows/update.yml
-      - scripts/update.py
+      - registry/**
+      - scripts/**
+      - tests/**
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
@@ -23,8 +25,11 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
+      - name: Test adapters
+        run: python3 -m unittest discover -s tests
+
       - name: Generate cask metadata
-        run: python3 scripts/update.py
+        run: python3 -m scripts.update
 
       - name: Validate generated JSON
         run: |
@@ -39,7 +44,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No metadata changes"
           else
-            version="$(python3 -c 'import json; print(json.load(open("cask.json"))[0]["version"])')"
-            git commit -m "Update motrix-next to ${version}"
+            git commit -m "Update cask metadata"
             git push
           fi

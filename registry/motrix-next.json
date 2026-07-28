@@ -1,0 +1,18 @@
+{
+  "token": "motrix-next",
+  "adapter": "homebrew-arch-app",
+  "source": "https://raw.githubusercontent.com/AnInsomniacy/homebrew-motrix-next/main/Casks/motrix-next.rb",
+  "download_hosts": [
+    "github.com"
+  ],
+  "intel_variations": [
+    "golden_gate",
+    "tahoe",
+    "sequoia",
+    "sonoma",
+    "ventura",
+    "monterey",
+    "big_sur",
+    "catalina"
+  ]
+}

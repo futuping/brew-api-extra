@@ -1,0 +1,56 @@
+[
+  {
+    "token": "motrix-next",
+    "full_token": "motrix-next",
+    "name": [
+      "Motrix Next"
+    ],
+    "desc": "Full-featured download manager built with Tauri",
+    "homepage": "https://github.com/AnInsomniacy/motrix-next",
+    "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_aarch64.app.tar.gz",
+    "version": "3.9.6",
+    "sha256": "c47248ffe9d8462896804431bb181bb130a1479762f0b8e25efc7d558508e501",
+    "artifacts": [
+      {
+        "app": [
+          "MotrixNext.app"
+        ]
+      }
+    ],
+    "auto_updates": true,
+    "variations": {
+      "golden_gate": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "tahoe": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "sequoia": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "sonoma": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "ventura": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "monterey": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "big_sur": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      },
+      "catalina": {
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.6/MotrixNext_x64.app.tar.gz",
+        "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
+      }
+    }
+  }
+]

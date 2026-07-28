@@ -1,0 +1,45 @@
+name: Update third-party cask metadata
+
+on:
+  push:
+    paths:
+      - .github/workflows/update.yml
+      - scripts/update.py
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-cask-metadata
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Generate cask metadata
+        run: python3 scripts/update.py
+
+      - name: Validate generated JSON
+        run: |
+          python3 -m json.tool cask.json >/dev/null
+          git diff --check
+
+      - name: Commit updates
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add cask.json
+          if git diff --cached --quiet; then
+            echo "No metadata changes"
+          else
+            version="$(python3 -c 'import json; print(json.load(open("cask.json"))[0]["version"])')"
+            git commit -m "Update motrix-next to ${version}"
+            git push
+          fi

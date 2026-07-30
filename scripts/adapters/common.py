@@ -27,7 +27,13 @@ def match_groups(
     return result.groups()
 
 
-def base_metadata(source: str, spec: Mapping[str, object]) -> dict[str, object]:
+def base_metadata(
+    source: str,
+    spec: Mapping[str, object],
+    *,
+    artifact_pattern: str = r'^\s*app\s+"([^"]+\.app)"',
+    artifact_label: str = "application",
+) -> dict[str, object]:
     token = required_string(spec, "token")
     return {
         "token": token,
@@ -44,9 +50,9 @@ def base_metadata(source: str, spec: Mapping[str, object]) -> dict[str, object]:
             {
                 "app": [
                     match(
-                        r'^\s*app\s+"([^"]+\.app)"',
+                        artifact_pattern,
                         source,
-                        "application",
+                        artifact_label,
                     )
                 ]
             }

@@ -48,6 +48,38 @@ class AdapterTests(unittest.TestCase):
             )
         )
 
+    def test_homebrew_input_method_app(self) -> None:
+        source = (FIXTURES / "input-method.rb").read_text(encoding="utf-8")
+        metadata = ADAPTERS["homebrew-input-method-app"](
+            source,
+            {
+                "token": "example-input-method",
+                "download_hosts": ["downloads.example.com"],
+            },
+        )
+
+        self.assertEqual(metadata["version"], "2.2.2,643")
+        self.assertEqual(
+            metadata["url"],
+            "https://downloads.example.com/2.2.2/Example_2.2.2_643.zip",
+        )
+        self.assertEqual(metadata["artifacts"], [{"app": ["Example.app"]}])
+
+    def test_input_method_adapter_rejects_app_artifact(self) -> None:
+        source = (FIXTURES / "input-method.rb").read_text(encoding="utf-8")
+        source = source.replace(
+            'input_method "Example.app"',
+            'app "Example.app"',
+        )
+        with self.assertRaisesRegex(RuntimeError, "input method"):
+            ADAPTERS["homebrew-input-method-app"](
+                source,
+                {
+                    "token": "example-input-method",
+                    "download_hosts": ["downloads.example.com"],
+                },
+            )
+
     def test_rejects_unexpected_download_host(self) -> None:
         source = (FIXTURES / "universal-app.rb").read_text(encoding="utf-8")
         with self.assertRaisesRegex(RuntimeError, "unexpected release URL"):

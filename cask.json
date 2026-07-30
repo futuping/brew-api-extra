@@ -52,5 +52,25 @@
         "sha256": "5512ea516a6d02512939baeba04f6aeaa3428f410aad130bd72274bf7d1d3b96"
       }
     }
+  },
+  {
+    "token": "wetype",
+    "full_token": "wetype",
+    "name": [
+      "WeType"
+    ],
+    "desc": "Text input app from WeChat team for Chinese users",
+    "homepage": "https://z.weixin.qq.com/",
+    "url": "https://download.weread.qq.com/app/wxkb/mac/2.2.2/WeType_2.2.2_643.zip",
+    "version": "2.2.2,643",
+    "sha256": "2dd9072c4a2b1ada9d664736ebb2f1d952348da09b85cb178727fc80b69b6ee9",
+    "artifacts": [
+      {
+        "app": [
+          "WeType.app"
+        ]
+      }
+    ],
+    "auto_updates": true
   }
 ]

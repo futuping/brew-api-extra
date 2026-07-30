@@ -4,13 +4,17 @@ Additional Homebrew Cask metadata for
 [brew-nix](https://github.com/BatteredBunny/brew-nix).
 
 The upstream `brew-api` project mirrors the official Homebrew Cask API. This
-repository supplies the same JSON shape for applications that are distributed
-through third-party taps.
+repository supplies the same JSON shape for applications from third-party taps
+and for narrowly adapted official casks that brew-nix cannot consume directly.
 
 ## Included casks
 
 - `motrix-next` from
   [`AnInsomniacy/motrix-next`](https://github.com/AnInsomniacy/homebrew-motrix-next)
+- `wetype` from the official
+  [`Homebrew/homebrew-cask`](https://github.com/Homebrew/homebrew-cask).
+  Its input-method bundle is exposed as an app artifact for brew-nix packaging;
+  consumers must still deploy it with a dedicated macOS input-method module.
 
 ## Repository layout
 

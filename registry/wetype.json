@@ -1,8 +1,0 @@
-{
-  "token": "wetype",
-  "adapter": "homebrew-input-method-app",
-  "source": "https://raw.githubusercontent.com/Homebrew/homebrew-cask/HEAD/Casks/w/wetype.rb",
-  "download_hosts": [
-    "download.weread.qq.com"
-  ]
-}

@@ -36,14 +36,26 @@ jobs:
           python3 -m json.tool cask.json >/dev/null
           git diff --check
 
-      - name: Commit updates
+      - name: Commit updates or keep scheduled workflow active
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
           git add cask.json
-          if git diff --cached --quiet; then
-            echo "No metadata changes"
-          else
+          if ! git diff --cached --quiet; then
             git commit -m "Update cask metadata"
             git push
+            exit 0
+          fi
+
+          last_commit_epoch="$(git log -1 --format=%ct)"
+          now_epoch="$(date +%s)"
+          if (( now_epoch - last_commit_epoch >= 30 * 24 * 60 * 60 )); then
+            git commit --allow-empty -m "chore: keep updater active"
+            git push
+          else
+            echo "No metadata update or heartbeat is due."
           fi

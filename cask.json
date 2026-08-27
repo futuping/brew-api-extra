@@ -52,5 +52,25 @@
         "sha256": "9aa69fb40eba5deadc1e3a0af88361d07a3ea80d7402cbf67d424375d36c94d2"
       }
     }
+  },
+  {
+    "token": "tinycast",
+    "full_token": "tinycast",
+    "name": [
+      "Tinycast"
+    ],
+    "desc": "Tiny, fully native launcher, hotkeys, and clipboard history",
+    "homepage": "https://github.com/abue-ammar/tinycast",
+    "url": "https://github.com/abue-ammar/tinycast/releases/download/v0.10.1/Tinycast-0.10.1.dmg",
+    "version": "0.10.1",
+    "sha256": "f6d6e6fea0b1710bfa8487fc4e17e96c649801d8fe429c05294c421baa9161ae",
+    "artifacts": [
+      {
+        "app": [
+          "Tinycast.app"
+        ]
+      }
+    ],
+    "auto_updates": true
   }
 ]

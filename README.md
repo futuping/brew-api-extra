@@ -11,6 +11,8 @@ through third-party taps.
 
 - `motrix-next` from
   [`AnInsomniacy/motrix-next`](https://github.com/AnInsomniacy/homebrew-motrix-next)
+- `tinycast` from
+  [`abue-ammar/tinycast`](https://github.com/abue-ammar/homebrew-tinycast)
 
 ## Repository layout
 

@@ -8,7 +8,7 @@ on:
       - scripts/**
       - tests/**
   schedule:
-    - cron: "17 * * * *"
+    - cron: "17 5 * * *"
   workflow_dispatch:
 
 permissions:

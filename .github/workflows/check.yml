@@ -1,0 +1,67 @@
+name: Check maintainer environment
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-maintainer-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-compatibility:
+    name: Python ${{ matrix.python-version }} compatibility
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version:
+          - "3.9"
+          - "3.14"
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - id: python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Verify selected interpreter and run offline checks
+        env:
+          EXPECTED_PYTHON: ${{ matrix.python-version }}
+          PYTHON: ${{ steps.python.outputs.python-path }}
+          PYTHONDONTWRITEBYTECODE: "1"
+          PYTHONNOUSERSITE: "1"
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          test -x "$PYTHON"
+          "$PYTHON" -c 'import os, sys; expected = tuple(map(int, os.environ["EXPECTED_PYTHON"].split("."))); assert sys.version_info[:2] == expected, (sys.version, expected)'
+          "$PYTHON" -m unittest discover -s tests
+          "$PYTHON" -m scripts.check_catalog
+          git diff --check
+
+  locked-environment:
+    name: Locked Python 3.14 environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@13d8dd58da0234aa297dedd986986ccb8e7f3e24 # v31.11.1
+
+      - name: Evaluate every supported system
+        run: nix flake check --all-systems --no-build --no-update-lock-file
+
+      - name: Run the locked offline entry point
+        run: nix run --no-update-lock-file .#maintainer-check

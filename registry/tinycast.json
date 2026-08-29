@@ -1,8 +1,0 @@
-{
-  "token": "tinycast",
-  "adapter": "homebrew-app",
-  "source": "https://raw.githubusercontent.com/abue-ammar/homebrew-tinycast/main/Casks/tinycast.rb",
-  "download_hosts": [
-    "github.com"
-  ]
-}

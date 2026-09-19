@@ -17,7 +17,7 @@ through third-party taps.
   Prereleases require explicit registry opt-in. This entry stays pinned until
   a reviewed registry change advances it or returns it to the upstream cask
   adapter; the daily job does not follow future betas automatically.
-- `motrix-next` 3.9.8 remains available for existing consumers. Its cask source
+- `motrix-next` 3.9.9 remains available for existing consumers. Its cask source
   is pinned before the upstream rename because the old path was deleted.
   The existing generated metadata and package identity are unchanged.
 

@@ -7,9 +7,9 @@
     ],
     "desc": "Full-featured download manager built with Tauri",
     "homepage": "https://github.com/AnInsomniacy/motrix-next",
-    "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_aarch64.app.tar.gz",
-    "version": "3.9.9",
-    "sha256": "7d058f9fb7b01db7097f9bc1b2f18b14eb6108a95154fc826be83c8cf5f067a6",
+    "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_aarch64.app.tar.gz",
+    "version": "3.9.8",
+    "sha256": "0fb18bfbaaa7c685e9d9a4a5e513140f3331cf624b9a6dbaef776ecf13739a10",
     "artifacts": [
       {
         "app": [
@@ -20,36 +20,90 @@
     "auto_updates": true,
     "variations": {
       "golden_gate": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "tahoe": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "sequoia": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "sonoma": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "ventura": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "monterey": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "big_sur": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
       },
       "catalina": {
-        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.9/MotrixNext_x64.app.tar.gz",
-        "sha256": "5f3cbed48f3d4558403cd35a67ef5aef0d403549d71824151c8c2a394c8ef642"
+        "url": "https://github.com/AnInsomniacy/motrix-next/releases/download/v3.9.8/MotrixNext_x64.app.tar.gz",
+        "sha256": "f67cd2e88232d3a34158d99878aa82f6353b099e72572b463fe798c134e965cc"
+      }
+    }
+  },
+  {
+    "token": "rayburst",
+    "full_token": "rayburst",
+    "name": [
+      "Rayburst"
+    ],
+    "desc": "Download manager for files, torrents and streams",
+    "homepage": "https://rayburst.pages.dev/",
+    "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_aarch64.app.tar.gz",
+    "version": "4.0.0-beta.2",
+    "sha256": "0d85480446ebe1716085b60f81e07d4cdc0e418a5c1e4c57f23ecadff4964d8c",
+    "artifacts": [
+      {
+        "app": [
+          "Rayburst.app"
+        ]
+      }
+    ],
+    "auto_updates": true,
+    "variations": {
+      "golden_gate": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "tahoe": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "sequoia": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "sonoma": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "ventura": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "monterey": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "big_sur": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
+      },
+      "catalina": {
+        "url": "https://github.com/AnInsomniacy/rayburst/releases/download/v4.0.0-beta.2/Rayburst_x64.app.tar.gz",
+        "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
       }
     }
   }

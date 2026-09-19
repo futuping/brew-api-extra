@@ -1,0 +1,27 @@
+{
+  "token": "rayburst",
+  "adapter": "github-release-arch-app",
+  "source": "https://api.github.com/repos/AnInsomniacy/rayburst/releases/tags/v4.0.0-beta.2",
+  "repository": "AnInsomniacy/rayburst",
+  "tag": "v4.0.0-beta.2",
+  "allow_prerelease": true,
+  "name": "Rayburst",
+  "desc": "Download manager for files, torrents and streams",
+  "homepage": "https://rayburst.pages.dev/",
+  "app": "Rayburst.app",
+  "arm_asset": "Rayburst_aarch64.app.tar.gz",
+  "intel_asset": "Rayburst_x64.app.tar.gz",
+  "download_hosts": [
+    "github.com"
+  ],
+  "intel_variations": [
+    "golden_gate",
+    "tahoe",
+    "sequoia",
+    "sonoma",
+    "ventura",
+    "monterey",
+    "big_sur",
+    "catalina"
+  ]
+}

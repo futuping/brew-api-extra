@@ -1,7 +1,7 @@
 {
   "token": "motrix-next",
   "adapter": "homebrew-arch-app",
-  "source": "https://raw.githubusercontent.com/AnInsomniacy/homebrew-motrix-next/main/Casks/motrix-next.rb",
+  "source": "https://raw.githubusercontent.com/AnInsomniacy/homebrew-rayburst/65f9173e7763c51c5d406e1dea863a134919c384/Casks/motrix-next.rb",
   "download_hosts": [
     "github.com"
   ],

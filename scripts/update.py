@@ -5,6 +5,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
+import os
+import tempfile
 import urllib.request
 from collections.abc import Callable, Iterable, Mapping
 from pathlib import Path
@@ -16,6 +19,15 @@ ROOT = Path(__file__).resolve().parent.parent
 REGISTRY = ROOT / "registry"
 OUTPUT = ROOT / "cask.json"
 USER_AGENT = "futuping/brew-api-extra"
+MAX_SOURCE_BYTES = 2 * 1024 * 1024
+
+
+class SourceRedirectHandler(urllib.request.HTTPRedirectHandler):
+    def redirect_request(self, request, fp, code, msg, headers, newurl):
+        target = urlparse(newurl)
+        if target.scheme != "https" or target.hostname != urlparse(request.full_url).hostname:
+            raise RuntimeError("unexpected metadata redirect")
+        return super().redirect_request(request, fp, code, msg, headers, newurl)
 
 
 def load_registry(directory: Path = REGISTRY) -> list[dict[str, object]]:
@@ -57,8 +69,12 @@ def fetch_source(url: str) -> str:
         url,
         headers={"User-Agent": USER_AGENT},
     )
-    with urllib.request.urlopen(request, timeout=30) as response:
-        return response.read().decode("utf-8")
+    opener = urllib.request.build_opener(SourceRedirectHandler())
+    with opener.open(request, timeout=30) as response:
+        content = response.read(MAX_SOURCE_BYTES + 1)
+        if len(content) > MAX_SOURCE_BYTES:
+            raise RuntimeError("upstream metadata exceeds size limit")
+        return content.decode("utf-8")
 
 
 def build_catalog(
@@ -81,10 +97,38 @@ def render_catalog(catalog: list[dict[str, object]]) -> str:
     return json.dumps(catalog, indent=2, ensure_ascii=False) + "\n"
 
 
+def validate_release_updates(current, catalog, specs) -> None:
+    """A pinned prerelease may advance only through a reviewed registry edit."""
+    previous = {entry["token"]: entry for entry in current}
+    pinned = {s["token"] for s in specs if s["adapter"] == "github-release-arch-app"}
+
+    def version_key(version):
+        match = re.fullmatch(r"([0-9]+)\.([0-9]+)\.([0-9]+)(?:-beta\.([0-9]+))?", version)
+        if match is None:
+            raise RuntimeError("unsupported pinned release version")
+        major, minor, patch, beta = match.groups()
+        return (int(major), int(minor), int(patch), beta is None, int(beta or 0))
+
+    for entry in catalog:
+        token = entry["token"]
+        old = previous.get(token)
+        if token not in pinned or old is None:
+            continue
+        if version_key(entry["version"]) < version_key(old["version"]):
+            raise RuntimeError(f"refusing release downgrade: {token}")
+        if entry["version"] == old["version"] and any(
+            entry.get(key) != old.get(key)
+            for key in ("url", "sha256", "variations", "artifacts")
+        ):
+            raise RuntimeError(f"same-version release identity changed: {token}")
+
+
 def update(check: bool = False) -> bool:
-    catalog = build_catalog(load_registry())
+    specs = load_registry()
+    catalog = build_catalog(specs)
     rendered = render_catalog(catalog)
     current = OUTPUT.read_text(encoding="utf-8") if OUTPUT.exists() else None
+    validate_release_updates(json.loads(current) if current else [], catalog, specs)
     if current == rendered:
         versions = ", ".join(
             f"{item['token']} {item['version']}" for item in catalog
@@ -93,7 +137,16 @@ def update(check: bool = False) -> bool:
         return False
     if check:
         raise RuntimeError(f"{OUTPUT.name} is not current")
-    OUTPUT.write_text(rendered, encoding="utf-8")
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", dir=OUTPUT.parent, delete=False) as handle:
+            temporary = Path(handle.name)
+            handle.write(rendered)
+        temporary.chmod(0o644)
+        os.replace(temporary, OUTPUT)
+    finally:
+        if temporary is not None and temporary.exists():
+            temporary.unlink()
     print(f"updated {OUTPUT.name} ({len(catalog)} cask(s))")
     return True
 

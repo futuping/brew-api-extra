@@ -106,5 +106,38 @@
         "sha256": "1de6ca2be124a6a65de0a1ac753ae687d0ea187e4807e212b2cdc30697d0b918"
       }
     }
+  },
+  {
+    "token": "search",
+    "full_token": "search",
+    "name": [
+      "Search"
+    ],
+    "desc": "Browser with nothing in the way",
+    "homepage": "https://officecommun.com/search",
+    "url": "https://github.com/driceroland/Search/releases/download/v1.0.3/Search.dmg",
+    "version": "1.0.3",
+    "sha256": "a30bc15d4e619ff9d2038886d7bc30f80721dede806bd4a03d4653402deeb6ef",
+    "artifacts": [
+      {
+        "app": [
+          "Search.app"
+        ]
+      }
+    ],
+    "auto_updates": true,
+    "depends_on": {
+      "arch": [
+        {
+          "type": "arm",
+          "bits": 64
+        }
+      ],
+      "macos": {
+        ">=": [
+          "14"
+        ]
+      }
+    }
   }
 ]

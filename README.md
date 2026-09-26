@@ -9,6 +9,9 @@ through third-party taps.
 
 ## Included casks
 
+- `search` from [the author's tap](https://github.com/driceroland/homebrew-tap).
+  The `homebrew-arm-app` adapter retains its Apple Silicon and macOS 14 minimum
+  requirements and follows the tap's version and checksum in the daily update.
 - `rayburst` 4.0.0-beta.2 from the pinned
   [official release](https://github.com/AnInsomniacy/rayburst/releases/tag/v4.0.0-beta.2).
   The upstream Homebrew tap currently describes beta.1, so the narrow

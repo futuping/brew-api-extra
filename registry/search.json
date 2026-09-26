@@ -1,0 +1,8 @@
+{
+  "token": "search",
+  "adapter": "homebrew-arm-app",
+  "source": "https://raw.githubusercontent.com/driceroland/homebrew-tap/main/Casks/search.rb",
+  "download_hosts": [
+    "github.com"
+  ]
+}

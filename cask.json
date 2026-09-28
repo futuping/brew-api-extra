@@ -115,9 +115,9 @@
     ],
     "desc": "Browser with nothing in the way",
     "homepage": "https://officecommun.com/search",
-    "url": "https://github.com/driceroland/Search/releases/download/v1.0.3/Search.dmg",
-    "version": "1.0.3",
-    "sha256": "a30bc15d4e619ff9d2038886d7bc30f80721dede806bd4a03d4653402deeb6ef",
+    "url": "https://github.com/driceroland/Search/releases/download/v1.0.4/Search.dmg",
+    "version": "1.0.4",
+    "sha256": "657ca99f1950f28f2a77d93e265edf874fbc69dabe284819e17818e1914665c5",
     "artifacts": [
       {
         "app": [

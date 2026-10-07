@@ -86,5 +86,10 @@ The daily 05:17 UTC scheduled workflow regenerates the complete catalog and
 commits `cask.json` only when upstream metadata changes. Pull requests and
 ordinary pushes are read-only and cannot publish catalog updates.
 
+The updater uses the workflow's `GITHUB_TOKEN` for GitHub API requests to avoid
+the shared runner's unauthenticated rate limit. Local runs may also supply
+`GITHUB_TOKEN`; it is optional for public metadata. The token is sent only to
+`https://api.github.com`, never to raw cask sources or redirected requests.
+
 Consumers should pin this repository as a non-flake input and update that input
 through their normal `nix flake update` workflow.

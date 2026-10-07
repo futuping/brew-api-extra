@@ -69,6 +69,11 @@ def fetch_source(url: str) -> str:
         url,
         headers={"User-Agent": USER_AGENT},
     )
+    source = urlparse(url)
+    token = os.environ.get("GITHUB_TOKEN")
+    if token and source.scheme == "https" and source.netloc == "api.github.com":
+        # Authenticate only the API request; never forward credentials on redirects.
+        request.add_unredirected_header("Authorization", f"Bearer {token}")
     opener = urllib.request.build_opener(SourceRedirectHandler())
     with opener.open(request, timeout=30) as response:
         content = response.read(MAX_SOURCE_BYTES + 1)

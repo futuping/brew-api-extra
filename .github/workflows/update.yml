@@ -25,6 +25,8 @@ jobs:
         run: nix run --no-update-lock-file .#maintainer-check
 
       - name: Generate cask metadata
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: nix run --no-update-lock-file .#update-casks
 
       - name: Validate generated metadata

@@ -58,7 +58,11 @@ class FetchSourceTests(unittest.TestCase):
         os.environ["GITHUB_TOKEN"] = "test-token"
         request = self.fetch_request()
         handler = self.build_opener.call_args.args[0]
-        for code in (301, 302, 303, 307, 308):
+        codes = [301, 302, 303, 307]
+        # Python 3.9 does not follow HTTP 308 redirects.
+        if hasattr(handler, "http_error_308"):
+            codes.append(308)
+        for code in codes:
             with self.subTest(code=code):
                 redirected = handler.redirect_request(
                     request, None, code, "Redirect", {},

@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import re
 from collections.abc import Mapping
 
 from .common import (
     SHA256_PATTERN,
     base_metadata,
     complete_metadata,
+    macos_requirement,
     match,
     match_groups,
     render_url,
@@ -19,7 +21,7 @@ def build(source: str, spec: Mapping[str, object]) -> dict[str, object]:
     metadata = base_metadata(source, spec)
     url_template = match(r'^\s*url\s+"([^"]+)"', source, "URL")
     arm_arch, intel_arch = match_groups(
-        r'^\s*arch\s+arm:\s*"([^"]+)",\s*intel:\s*"([^"]+)"',
+        r'^\s*arch\s+arm:\s*"([^"]*)",\s*intel:\s*"([^"]*)"',
         source,
         "architecture names",
     )
@@ -32,7 +34,7 @@ def build(source: str, spec: Mapping[str, object]) -> dict[str, object]:
     allowed_hosts = string_list(spec, "download_hosts")
     version = str(metadata["version"])
 
-    return complete_metadata(
+    result = complete_metadata(
         metadata,
         render_url(
             url_template,
@@ -52,3 +54,6 @@ def build(source: str, spec: Mapping[str, object]) -> dict[str, object]:
             for variation in string_list(spec, "intel_variations")
         },
     )
+    if re.search(r"^\s*depends_on\s+macos\s*:", source, re.MULTILINE):
+        result["depends_on"] = {"macos": macos_requirement(source)}
+    return result

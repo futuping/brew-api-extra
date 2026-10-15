@@ -7,6 +7,7 @@ from collections.abc import Mapping
 from urllib.parse import urlparse
 
 SHA256_PATTERN = r"[0-9a-f]{64}"
+MACOS_VERSIONS = {"sonoma": "14", "sequoia": "15", "tahoe": "26"}
 
 
 def match(pattern: str, source: str, label: str) -> str:
@@ -25,6 +26,15 @@ def match_groups(
     if result is None:
         raise RuntimeError(f"unable to parse {label} from upstream cask")
     return result.groups()
+
+
+def macos_requirement(source: str) -> dict[str, list[str]]:
+    minimum = match(
+        r"^\s*depends_on\s+macos:\s*:(\w+)\s*$", source, "macOS requirement"
+    )
+    if minimum not in MACOS_VERSIONS:
+        raise RuntimeError(f"unsupported macOS minimum: {minimum}")
+    return {">=": [MACOS_VERSIONS[minimum]]}
 
 
 def base_metadata(source: str, spec: Mapping[str, object]) -> dict[str, object]:

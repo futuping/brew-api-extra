@@ -115,9 +115,9 @@
     ],
     "desc": "Browser with nothing in the way",
     "homepage": "https://officecommun.com/search",
-    "url": "https://github.com/driceroland/Search/releases/download/v1.0.4/Search.dmg",
-    "version": "1.0.4",
-    "sha256": "657ca99f1950f28f2a77d93e265edf874fbc69dabe284819e17818e1914665c5",
+    "url": "https://github.com/driceroland/Search/releases/download/v1.0.5/Search.dmg",
+    "version": "1.0.5",
+    "sha256": "4c750f505cf108bf06fc3be256abaeab3c0dfa1a587bec7036f1bbe732466ea1",
     "artifacts": [
       {
         "app": [
@@ -126,13 +126,25 @@
       }
     ],
     "auto_updates": true,
+    "variations": {
+      "golden_gate": {
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.5/Search-Intel.dmg",
+        "sha256": "9feab786e545b9f4a40b68bd985cd1f24956b772abd1bdf9e91198e3812b1b64"
+      },
+      "tahoe": {
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.5/Search-Intel.dmg",
+        "sha256": "9feab786e545b9f4a40b68bd985cd1f24956b772abd1bdf9e91198e3812b1b64"
+      },
+      "sequoia": {
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.5/Search-Intel.dmg",
+        "sha256": "9feab786e545b9f4a40b68bd985cd1f24956b772abd1bdf9e91198e3812b1b64"
+      },
+      "sonoma": {
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.5/Search-Intel.dmg",
+        "sha256": "9feab786e545b9f4a40b68bd985cd1f24956b772abd1bdf9e91198e3812b1b64"
+      }
+    },
     "depends_on": {
-      "arch": [
-        {
-          "type": "arm",
-          "bits": 64
-        }
-      ],
       "macos": {
         ">=": [
           "14"

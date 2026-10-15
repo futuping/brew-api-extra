@@ -10,8 +10,10 @@ through third-party taps.
 ## Included casks
 
 - `search` from [the author's tap](https://github.com/driceroland/homebrew-tap).
-  The `homebrew-arm-app` adapter retains its Apple Silicon and macOS 14 minimum
-  requirements and follows the tap's version and checksum in the daily update.
+  Since 1.0.5, its cask supplies separate Apple Silicon and Intel downloads.
+  The `homebrew-arch-app` adapter handles the empty Apple Silicon filename
+  suffix, preserves the macOS 14 minimum, and follows both upstream checksums
+  in the daily update.
 - `rayburst` 4.0.0-beta.2 from the pinned
   [official release](https://github.com/AnInsomniacy/rayburst/releases/tag/v4.0.0-beta.2).
   The upstream Homebrew tap currently describes beta.1, so the narrow

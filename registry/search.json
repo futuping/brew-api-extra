@@ -1,8 +1,14 @@
 {
   "token": "search",
-  "adapter": "homebrew-arm-app",
+  "adapter": "homebrew-arch-app",
   "source": "https://raw.githubusercontent.com/driceroland/homebrew-tap/main/Casks/search.rb",
   "download_hosts": [
     "github.com"
+  ],
+  "intel_variations": [
+    "golden_gate",
+    "tahoe",
+    "sequoia",
+    "sonoma"
   ]
 }

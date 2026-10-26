@@ -115,9 +115,9 @@
     ],
     "desc": "Browser with nothing in the way",
     "homepage": "https://officecommun.com/search",
-    "url": "https://github.com/driceroland/Search/releases/download/v1.0.6/Search.dmg",
-    "version": "1.0.6",
-    "sha256": "c7ec6f1d6c790daf2f193beff8a156736070e90910bdb7c861c1acf2db1ef820",
+    "url": "https://github.com/driceroland/Search/releases/download/v1.0.7/Search.dmg",
+    "version": "1.0.7",
+    "sha256": "a79704b032e2d6316f2a056b5b1abfe7dd9b60effb67ec28bf45ea8d9a61d777",
     "artifacts": [
       {
         "app": [
@@ -128,20 +128,20 @@
     "auto_updates": true,
     "variations": {
       "golden_gate": {
-        "url": "https://github.com/driceroland/Search/releases/download/v1.0.6/Search-Intel.dmg",
-        "sha256": "d0890a9968bd506da9b9577fa4039084662164971fd1f318f7c2be9687586bab"
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.7/Search-Intel.dmg",
+        "sha256": "77707798a6ec813ceb61789bb5141b071042fc7106d296bb0aa8fee06a1eb216"
       },
       "tahoe": {
-        "url": "https://github.com/driceroland/Search/releases/download/v1.0.6/Search-Intel.dmg",
-        "sha256": "d0890a9968bd506da9b9577fa4039084662164971fd1f318f7c2be9687586bab"
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.7/Search-Intel.dmg",
+        "sha256": "77707798a6ec813ceb61789bb5141b071042fc7106d296bb0aa8fee06a1eb216"
       },
       "sequoia": {
-        "url": "https://github.com/driceroland/Search/releases/download/v1.0.6/Search-Intel.dmg",
-        "sha256": "d0890a9968bd506da9b9577fa4039084662164971fd1f318f7c2be9687586bab"
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.7/Search-Intel.dmg",
+        "sha256": "77707798a6ec813ceb61789bb5141b071042fc7106d296bb0aa8fee06a1eb216"
       },
       "sonoma": {
-        "url": "https://github.com/driceroland/Search/releases/download/v1.0.6/Search-Intel.dmg",
-        "sha256": "d0890a9968bd506da9b9577fa4039084662164971fd1f318f7c2be9687586bab"
+        "url": "https://github.com/driceroland/Search/releases/download/v1.0.7/Search-Intel.dmg",
+        "sha256": "77707798a6ec813ceb61789bb5141b071042fc7106d296bb0aa8fee06a1eb216"
       }
     },
     "depends_on": {

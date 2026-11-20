@@ -1,0 +1,14 @@
+{
+  "token": "kiri",
+  "adapter": "homebrew-arch-app",
+  "source": "https://raw.githubusercontent.com/libracoder/homebrew-kiri/main/Casks/kiri.rb",
+  "download_hosts": [
+    "github.com"
+  ],
+  "intel_variations": [
+    "golden_gate",
+    "tahoe",
+    "sequoia",
+    "sonoma"
+  ]
+}

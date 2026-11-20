@@ -1,5 +1,50 @@
 [
   {
+    "token": "kiri",
+    "full_token": "kiri",
+    "name": [
+      "Kiri"
+    ],
+    "desc": "Container runtime compatible with the Docker CLI, Compose and buildx",
+    "homepage": "https://runkiri.com/",
+    "url": "https://github.com/libracoder/kiri/releases/download/v0.2.2/Kiri-0.2.2-arm64.dmg",
+    "version": "0.2.2",
+    "sha256": "0f0ed39fc08f971c33ead60371c9d58768d993a853407e136f63f62a7edc9864",
+    "artifacts": [
+      {
+        "app": [
+          "Kiri.app"
+        ]
+      }
+    ],
+    "auto_updates": true,
+    "variations": {
+      "golden_gate": {
+        "url": "https://github.com/libracoder/kiri/releases/download/v0.2.2/Kiri-0.2.2-x86_64.dmg",
+        "sha256": "f78299a131d28801bcdfafd4bc0af8737441181d217110ee955ce251691d83d9"
+      },
+      "tahoe": {
+        "url": "https://github.com/libracoder/kiri/releases/download/v0.2.2/Kiri-0.2.2-x86_64.dmg",
+        "sha256": "f78299a131d28801bcdfafd4bc0af8737441181d217110ee955ce251691d83d9"
+      },
+      "sequoia": {
+        "url": "https://github.com/libracoder/kiri/releases/download/v0.2.2/Kiri-0.2.2-x86_64.dmg",
+        "sha256": "f78299a131d28801bcdfafd4bc0af8737441181d217110ee955ce251691d83d9"
+      },
+      "sonoma": {
+        "url": "https://github.com/libracoder/kiri/releases/download/v0.2.2/Kiri-0.2.2-x86_64.dmg",
+        "sha256": "f78299a131d28801bcdfafd4bc0af8737441181d217110ee955ce251691d83d9"
+      }
+    },
+    "depends_on": {
+      "macos": {
+        ">=": [
+          "14"
+        ]
+      }
+    }
+  },
+  {
     "token": "motrix-next",
     "full_token": "motrix-next",
     "name": [

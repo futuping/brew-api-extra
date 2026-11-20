@@ -9,6 +9,9 @@ through third-party taps.
 
 ## Included casks
 
+- `kiri` from [the Kiri tap](https://github.com/libracoder/homebrew-kiri).
+  The catalog tracks the upstream Apple Silicon and Intel DMGs for macOS 14
+  and later.
 - `search` from [the author's tap](https://github.com/driceroland/homebrew-tap).
   Since 1.0.5, its cask supplies separate Apple Silicon and Intel downloads.
   The `homebrew-arch-app` adapter handles the empty Apple Silicon filename
